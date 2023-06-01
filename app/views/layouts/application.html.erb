@@ -11,6 +11,11 @@
   </head>
 
   <body>
-    <%= yield %>
+    <nav>
+      <%= link_to('Home', root_path) %>
+    </nav>
+    <div>
+      <%= yield %>
+    </div>
   </body>
 </html>
