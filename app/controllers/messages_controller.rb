@@ -1,6 +1,6 @@
 class MessagesController < ApplicationController
   before_action :set_message, only:   %i[edit update destroy]
-  before_action :permission?, except: %i[new create]
+  before_action :permission?, except: %i[new create retweet]
   before_action :authorize
 
   # GET /messages/new
@@ -36,6 +36,13 @@ class MessagesController < ApplicationController
   def destroy
     @message.destroy
     redirect_to root_path, notice: "Message was successfully destroyed.", status: :see_other
+  end
+
+  def retweet
+    message = Message.find(params[:message_id])
+    message.retweet(current_user)
+
+    redirect_to root_path, notice: 'Thanks for retweeting!'
   end
 
   private

@@ -28,4 +28,10 @@ class Message < ApplicationRecord
     file_path = File.join(Rails.root, 'public', self.image_url)
     File.delete(file_path) if File.exist?(file_path)
   end
+
+  def retweet(user)
+    text = "Retweet from @#{self.user.name}: #{self.text}"
+
+    Message.create(user: user, text: text, image_url: self.image_url)
+  end
 end
